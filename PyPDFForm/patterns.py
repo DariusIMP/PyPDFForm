@@ -74,7 +74,7 @@ WIDGET_TYPE_PATTERNS = [
     (
         (
             {Parent: {FT: Btn}},
-            {Parent: {DV: (Yes, Off)}},
+            {Parent: {DV: (Yes, Off, "/SÃ\xad")}},
             {AS: (Yes, Off)},
         ),
         Checkbox,
@@ -113,9 +113,10 @@ def update_checkbox_value(annot: DictionaryObject, check: bool = False) -> None:
         check (bool): True to check the checkbox, False to uncheck it. Defaults to False.
     """
     for each in annot[AP][N]:
-        if (check and str(each) != Off) or (not check and str(each) == Off):
-            annot[NameObject(AS)] = NameObject(each)
-            annot[NameObject(V)] = NameObject(each)
+        each_str = str(each)
+        if (check and each_str != Off) or (not check and each_str == Off):
+            annot[NameObject(AS)] = each
+            annot[NameObject(V)] = each
             break
 
 
